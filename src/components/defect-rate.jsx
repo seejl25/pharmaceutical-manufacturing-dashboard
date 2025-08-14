@@ -23,20 +23,20 @@ function parseCustomDate(dateStr) {
   return new Date(2000 + year, month - 1, day); // year -> 2025
 }
 
-function MachineUptimeLine({ pharmaData, startDate, endDate }) {
+function DefectRate({ pharmaData, startDate, endDate }) {
     const filteredData = pharmaData.filter(item => {
         const itemDate = parseCustomDate(item.date)
         return itemDate >= startDate && itemDate <= endDate
     })
 
     const labels = filteredData.map(each => each.date);
-    const values = filteredData.map(each => each.machine_uptime_pct);
+    const values = filteredData.map(each => each.defect_rate_pct);
 
     const data = {
         labels: labels,
         datasets: [
             {
-                label: "Machine Uptime/%",
+                label: "Defect Rate/%",
                 data: values,
                 borderColor: "#E4AD2E",
                 backgroundColor: "#f5f5f5",
@@ -49,11 +49,11 @@ function MachineUptimeLine({ pharmaData, startDate, endDate }) {
         responsive: true,
         plugins: {
             legend: {position: "top"},
-            title: { display: true, text: "Machine uptime" }
+            title: { display: true, text: "Defect Rate" }
         }
     };
 
     return <Line data={data} options={options} />
 }
 
-export default MachineUptimeLine
+export default DefectRate

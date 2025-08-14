@@ -83,3 +83,42 @@ input {
     align-items: center;
     gap: 1rem;
 }
+
+.chart-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem;
+}
+
+.dept-container {
+    grid-area: 1/1/3/2;
+    background-color: #d9d9d9;
+    border-radius: 12px;
+    box-shadow: 2px 2px 4px 2px #CF581D;
+    text-align: center;
+}
+
+.engineering, .vaccination, .immunology {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 4rem;
+}
+
+.dept-container h1 {
+    margin: 0;
+}
+
+.dept-container p {
+    margin: 0;
+}
+
+.chart-card {
+    background-color: #d9d9d9;
+    border-radius: 12px;
+    box-shadow: 2px 2px 4px 2px #CF581D;
+}
+
+

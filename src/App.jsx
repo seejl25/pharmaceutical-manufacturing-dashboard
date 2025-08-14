@@ -2,6 +2,12 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 import MachineUptimeLine from "./components/Machine-uptime";
+import DefectRate from "./components/defect-rate";
+import UnitsProduced from "./components/units-produced";
+import EnergyConsumed from "./components/energy";
+
+import DeptProduction from "./components/Dept-production";
+
 import KPIMachineUptime from "./components/Kpi-machine-uptime";
 import KPIUnitsProduced from "./components/Kpi-units";
 import KPIDefect from "./components/Kpi-defect-rate";
@@ -88,8 +94,20 @@ function App() {
           </div>
           </div>
 
-          <div>
-            <MachineUptimeLine pharmaData={pharmaData} />
+          <div className="chart-container">
+            <DeptProduction pharmaData={pharmaData} startDate={startDate} endDate={endDate} />
+            <div className="chart-card">
+              <MachineUptimeLine pharmaData={pharmaData} startDate={startDate} endDate={endDate} />
+            </div>
+            <div className="chart-card">
+              <DefectRate pharmaData={pharmaData} startDate={startDate} endDate={endDate} />
+            </div>
+            <div className="chart-card">
+              <UnitsProduced pharmaData={pharmaData} startDate={startDate} endDate={endDate} />
+            </div>
+            <div className="chart-card">
+              <EnergyConsumed pharmaData={pharmaData} startDate={startDate} endDate={endDate} />
+            </div>
           </div>
         </div>
       </>
