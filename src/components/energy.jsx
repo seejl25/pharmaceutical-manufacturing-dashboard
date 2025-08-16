@@ -23,7 +23,7 @@ function parseCustomDate(dateStr) {
   return new Date(2000 + year, month - 1, day); // year -> 2025
 }
 
-function EnergyConsumed({ pharmaData, startDate, endDate }) {
+function EnergyConsumed({ pharmaData, startDate, endDate, darkMode }) {
     const filteredData = pharmaData.filter(item => {
         const itemDate = parseCustomDate(item.date)
         return itemDate >= startDate && itemDate <= endDate
@@ -45,15 +45,58 @@ function EnergyConsumed({ pharmaData, startDate, endDate }) {
         ]
     };
 
-    const options = {
-        responsive: true,
-        plugins: {
-            legend: {position: "top"},
-            title: { display: true, text: "Energy Consumption" }
-        }
-    };
-
-    return <Line data={data} options={options} />
+    if (darkMode) {
+        const options = {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: "top",
+                    labels: {
+                        color: "#f5f5f5"
+                    }
+                },
+                title: { 
+                    display: true, 
+                    text: "Energy Consumed",
+                    color: "#f5f5f5" 
+                }
+            },
+            tooltip: {
+                backgroundColor: "black"
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: "#f5f5f5"
+                    },
+                    grid: {
+                        color: "rgba(245,245,245,0.1)"
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: "#f5f5f5"
+                    },
+                    grid: {
+                        color: "rgba(245,245,245,0.1)"
+                    }
+                }
+            }
+        };
+        return <Line data={data} options={options} />
+    } else {
+        const options = {
+            responsive: true,
+            plugins: {
+                legend: {position: "top"},
+                title: { display: true, text: "Energy Consumed" }
+            },
+            tooltip: {
+                backgroundColor: "black"
+            }
+        };
+        return <Line data={data} options={options} />
+    }
 }
 
 export default EnergyConsumed

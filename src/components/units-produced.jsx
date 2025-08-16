@@ -23,7 +23,7 @@ function parseCustomDate(dateStr) {
   return new Date(2000 + year, month - 1, day); // year -> 2025
 }
 
-function UnitsProduced({ pharmaData, startDate, endDate }) {
+function UnitsProduced({ pharmaData, startDate, endDate, darkMode }) {
     const filteredData = pharmaData.filter(item => {
         const itemDate = parseCustomDate(item.date)
         return itemDate >= startDate && itemDate <= endDate
@@ -44,15 +44,58 @@ function UnitsProduced({ pharmaData, startDate, endDate }) {
         ]
     };
 
-    const options = {
-        responsive: true,
-        plugins: {
-            legend: {position: "top"},
-            title: { display: true, text: "Units Produced" }
+    if (darkMode) {
+            const options = {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: "top",
+                        labels: {
+                            color: "#f5f5f5"
+                        }
+                    },
+                    title: { 
+                        display: true, 
+                        text: "Units Produced",
+                        color: "#f5f5f5" 
+                    }
+                },
+                tooltip: {
+                    backgroundColor: "black"
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: "#f5f5f5"
+                        },
+                        grid: {
+                            color: "rgba(245,245,245,0.1)"
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            color: "#f5f5f5"
+                        },
+                        grid: {
+                            color: "rgba(245,245,245,0.1)"
+                        }
+                    }
+                }
+            };
+            return <Bar data={data} options={options} />
+        } else {
+            const options = {
+                responsive: true,
+                plugins: {
+                    legend: {position: "top"},
+                    title: { display: true, text: "Units Produced" }
+                },
+                tooltip: {
+                    backgroundColor: "black"
+                }
+            };
+            return <Bar data={data} options={options} />
         }
-    };
-
-    return <Bar data={data} options={options} />
 }
 
 export default UnitsProduced

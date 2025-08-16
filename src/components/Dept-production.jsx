@@ -1,12 +1,16 @@
 import engineeringIcon from "../assets/engineering.svg"
+import engineeringWhiteIcon from "../assets/engineering_white.svg"
 import vaccineIcon from "../assets/vaccine.svg"
+import vaccineWhiteIcon from "../assets/vaccine_white.svg"
 import immuneIcon from "../assets/immunology.svg"
+import immuneWhiteIcon from "../assets/immunology_white.svg"
+
 function parseCustomDate(dateStr) {
   const [day, month, year] = dateStr.split("/").map(num => parseInt(num, 10));
   return new Date(2000 + year, month - 1, day); // year -> 2025
 }
 
-function DeptProduction({ pharmaData, startDate, endDate}) {
+function DeptProduction({ pharmaData, startDate, endDate, darkMode}) {
     const filteredData = pharmaData.filter(item => {
         const itemDate = parseCustomDate(item.date)
         return itemDate >= startDate && itemDate <= endDate
@@ -33,27 +37,43 @@ function DeptProduction({ pharmaData, startDate, endDate}) {
     });
 
     return (
-        <div className="dept-container">
-            <h3>Production by Department</h3>
+        <div className="dept-container" style={
+            darkMode
+              ? { backgroundColor: "#757575" }
+              : { backgroundColor: "#D9D9D9" }
+          }>
+            <h3 style={darkMode ? {color: "#f5f5f5" } : {color: "black" }}>Production by Department</h3>
             <div className="engineering">
-                <img src={engineeringIcon} alt="" />
+                {
+                    darkMode ?
+                    <img src={engineeringWhiteIcon} alt="" /> :
+                    <img src={engineeringIcon} alt="" />
+                }
                 <div className="values">
-                    <p>Engineering</p>
-                    <h1>{engUnits}</h1>
+                    <p style={darkMode ? {color: "#f5f5f5" } : {color: "black" }}>Engineering</p>
+                    <h1 style={darkMode ? {color: "#f5f5f5" } : {color: "black" }}>{engUnits}</h1>
                 </div>
             </div>
             <div className="vaccination">
-                <img src={vaccineIcon} alt="" />
+                {
+                    darkMode ?
+                    <img src={vaccineWhiteIcon} alt="" /> :
+                    <img src={vaccineIcon} alt="" />
+                }
                 <div className="values">
-                    <p>Vaccination</p>
-                    <h1>{vacUnits}</h1>
+                    <p style={darkMode ? {color: "#f5f5f5" } : {color: "black" }}>Vaccination</p>
+                    <h1 style={darkMode ? {color: "#f5f5f5" } : {color: "black" }}>{vacUnits}</h1>
                 </div>
             </div>
             <div className="immunology">
-                <img src={immuneIcon} alt="" />
+                {
+                    darkMode ?
+                    <img src={immuneWhiteIcon} alt="" /> :
+                    <img src={immuneIcon} alt="" />
+                }
                 <div className="values">
-                    <p>Immunology</p>
-                    <h1>{immUnit}</h1>
+                    <p style={darkMode ? {color: "#f5f5f5" } : {color: "black" }}>Immunology</p>
+                    <h1 style={darkMode ? {color: "#f5f5f5" } : {color: "black" }}>{immUnit}</h1>
                 </div>
             </div>
         </div>

@@ -1,11 +1,12 @@
 import defectIcon from "../assets/defect.svg"
+import defectWhiteIcon from "../assets/defect_white.svg"
 
 function parseCustomDate(dateStr) {
   const [day, month, year] = dateStr.split("/").map(num => parseInt(num, 10));
   return new Date(2000 + year, month - 1, day); // year -> 2025
 }
 
-function KPIDefect({ pharmaData, startDate, endDate }) {
+function KPIDefect({ pharmaData, startDate, endDate, darkMode }) {
     const filteredData = pharmaData.filter(item => {
         const itemDate = parseCustomDate(item.date)
         return itemDate >= startDate && itemDate <= endDate
@@ -23,10 +24,14 @@ function KPIDefect({ pharmaData, startDate, endDate }) {
     return (
         <>
             <div className="title">
-                <p>Defect Rate</p>
-                <img src={defectIcon} alt="" />
+                <p style={darkMode ? {color: "#f5f5f5" } : {color: "black" }}>Defect Rate</p>
+                {
+                    darkMode ?
+                    <img src={defectWhiteIcon} alt="" /> :
+                    <img src={defectIcon} alt="" />
+                }
             </div>
-            <h1>{avgDefect}%</h1>
+            <h1 style={darkMode ? {color: "#f5f5f5" } : {color: "black" }}>{avgDefect}%</h1>
         </>
     )
 }

@@ -1,11 +1,12 @@
 import energyIcon from "../assets/energy.svg"
+import energyWhiteIcon from "../assets/energy_white.svg"
 
 function parseCustomDate(dateStr) {
   const [day, month, year] = dateStr.split("/").map(num => parseInt(num, 10));
   return new Date(2000 + year, month - 1, day); // year -> 2025
 }
 
-function KPIEnergy({ pharmaData, startDate, endDate }) {
+function KPIEnergy({ pharmaData, startDate, endDate, darkMode }) {
     const filteredData = pharmaData.filter(item => {
         const itemDate = parseCustomDate(item.date)
         return itemDate >= startDate && itemDate <= endDate
@@ -23,10 +24,14 @@ function KPIEnergy({ pharmaData, startDate, endDate }) {
     return (
         <>
             <div className="title">
-                <p>Energy Consumption</p>
-                <img src={energyIcon} alt="" />
+                <p style={darkMode ? {color: "#f5f5f5" } : {color: "black" }}>Energy Consumption</p>
+                {
+                    darkMode ?
+                    <img src={energyWhiteIcon} alt="" /> :
+                    <img src={energyIcon} alt="" />
+                }
             </div>
-            <h1>{total}kWh</h1>
+            <h1 style={darkMode ? {color: "#f5f5f5" } : {color: "black" }}>{total}kWh</h1>
         </>
     )
 }
